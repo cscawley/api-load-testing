@@ -1,0 +1,21 @@
+{
+  "name": "api-load-testing",
+  "version": "1.0.0",
+  "description": "API load testing project.",
+  "main": "newman.js",
+  "scripts": {
+    "start": "node --max-old-space-size=2046 index.js",
+    "4gig": "node --max-old-space-size=4096 index.js",
+    "6gig": "node --max-old-space-size=6142 index.js",
+    "8gig": "node --max-old-space-size=8188 index.js",
+    "10gig": "node --max-old-space-size=10234 index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.1.0",
+    "crypto-js": "^3.1.9-1",
+    "moment": "^2.24.0",
+    "newman": "^4.5.7"
+  }
+}
