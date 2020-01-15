@@ -2,7 +2,7 @@
   "name": "api-load-testing",
   "version": "1.0.0",
   "description": "API load testing project.",
-  "main": "newman.js",
+  "main": "index.js",
   "scripts": {
     "start": "node --max-old-space-size=2046 index.js",
     "4gig": "node --max-old-space-size=4096 index.js",
