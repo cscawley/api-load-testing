@@ -1,7 +1,7 @@
 var path = require('path');
 async = require('async');
 newman = require('newman');
- // Change Hits to the number of times you'd like to execute the postman script. Increase parallel if you feel like getting wild.
+ // Change Hits to the number of times you'd like to execute the postman script.
 var config = {
     hits: 50,
     parallel: 10
@@ -18,7 +18,7 @@ var addarray = [];
 for (let run = 0; run < config.parallel; run++) {
     addarray.push(parallelCollectionRun)
 }
-// Runs the Postman sample collection, in parallel.
+
 async.parallel(addarray,
     function (err, result) {
     err && console.error(err);
