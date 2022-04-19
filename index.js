@@ -1,28 +1,41 @@
 var path = require('path');
 async = require('async');
 newman = require('newman');
- // Change Hits to the number of times you'd like to execute the postman script.
+newmanTasks = [];
+
+/*
+Newman hit count and parallel config.
+*/
 var config = {
     hits: 50,
     parallel: 10
-}
+};
+/*
+Newman options.
+*/
 options = {
     collection: path.join(__dirname, 'run.json'),
     reporters: 'cli',
     iterationCount: config.hits
-},
-parallelCollectionRun = function (done) {
-    newman.run(options, done);
 };
-var addarray = [];
-for (let run = 0; run < config.parallel; run++) {
-    addarray.push(parallelCollectionRun)
-}
 
-async.parallel(addarray,
+/*
+Build array of newman tasks.
+*/
+parallelCollectionRun = done => newman.run(options, done);
+for (let run = 0; run < config.parallel; run++) {
+    newmanTasks.push(parallelCollectionRun)
+};
+
+/*
+Async is a utility module which provides straight-forward, 
+powerful functions for working with asynchronous JavaScript.
+async.parallel(tasks, callback)
+*/
+async.parallel(newmanTasks,
     function (err, result) {
     err && console.error(err);
-    result.forEach(function (result) {
+    result.forEach(result => {
         var failures = result.run.failures;
         console.info(failures.length ? JSON.stringify(failures.failures, null, 2) : `${result.collection.name} ran successfully.`);
     });
